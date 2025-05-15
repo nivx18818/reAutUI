@@ -14,7 +14,7 @@ function Scenario() {
         <label className="block mb-2 text-sm font-medium">Description</label>
         <Textarea
           placeholder="Enter detailed description of the scenario"
-          className="min-h-[150px]"
+          className="min-h-[150px] resize-none"
         />
       </div>
 
