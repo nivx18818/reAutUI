@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { cn } from "./lib/utils";
 
 import AppMenubar from "./components/AppMenubar";
 import AppSidebar from "./components/AppSidebar";
@@ -14,15 +15,15 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen bg-white bg-[linear-gradient(#e5e7eb_1px,transparent_1px),linear-gradient(to_right,#e5e7eb_1px,transparent_1px)] bg-[size:24px_24px] relative w-full">
-      <div className="absolute top-5 left-28">
+    <div className="flex h-screen bg-[#f8fafc] bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] bg-[size:50px_50px] relative w-full px-28">
+      <div className="absolute top-5">
         <img src={LogoWithText} alt="Logo" className="w-32 h-8" />
       </div>
 
       <AppSidebar />
 
       {/* Main Content */}
-      <div className="flex flex-col flex-1">
+      <div className={cn("flex flex-col flex-1", activeTab === "scenario" ? "mt-32" : "mt-24")}>
         <div className="flex-1 p-6">
           <CurrentTabComponent />
         </div>

@@ -1,38 +1,77 @@
-import { Checkbox } from "@/components/ui/checkbox";
-import { PanelLeftClose } from "lucide-react";
+import { PanelLeftClose, Save, TvMinimal } from "lucide-react";
 import Logo from "/logo.svg";
 
 import {
   Sidebar,
   SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
   SidebarHeader,
+  SidebarMenu,
+  SidebarMenuAction,
+  SidebarMenuButton,
+  SidebarMenuItem,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import useSidebar from "@/hooks/use-sidebar";
 
-function AppSidebar() {
+function AppSidebar({ className }) {
+  const { open } = useSidebar();
+
   return (
     <div className="fixed">
-      <Sidebar collapsible="icon">
+      <Sidebar variant="floating" collapsible="icon" className={className}>
         <SidebarHeader>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <img src={Logo} alt="Logo" className="w-8 h-8" />
-              <span className="font-medium">Scenarios</span>
-            </div>
-            <SidebarTrigger>
-              <PanelLeftClose />
-            </SidebarTrigger>
-          </div>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                key={open ? "sidebar-button-open" : "sidebar-button-collapsed"}
+                asChild
+                className="pr-0 hover:bg-transparent active:bg-transparent"
+                tooltip="Open sidebar"
+              >
+                {!open ? (
+                  <SidebarTrigger>
+                    <img src={Logo} alt="Logo" className="w-8 h-8" />
+                  </SidebarTrigger>
+                ) : (
+                  <div className="flex items-center justify-between">
+                    <img src={Logo} alt="Logo" className="w-8 h-8" />
+                    <SidebarTrigger>
+                      <PanelLeftClose />
+                    </SidebarTrigger>
+                  </div>
+                )}
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
         </SidebarHeader>
         <SidebarContent>
-          {[1, 2].map((num) => (
-            <div key={num} className="flex items-center p-2 space-x-2">
-              <Checkbox id={`scenario-${num}`} />
-              <label htmlFor={`scenario-${num}`} className="text-sm">
-                Scenario {num}
-              </label>
-            </div>
-          ))}
+          <SidebarGroup>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {[1, 2].map((num) => (
+                  <SidebarMenuItem key={num}>
+                    <SidebarMenuButton
+                      isActive={num === 1}
+                      tooltip={`Scenario ${num}`}
+                      className="has-[:hover]:!bg-sidebar"
+                    >
+                      <TvMinimal />
+                      <span className="text-sm whitespace-nowrap">
+                        Scenario {num}
+                      </span>
+                      <SidebarMenuAction asChild>
+                        <span>
+                          <Save />
+                        </span>
+                      </SidebarMenuAction>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
         </SidebarContent>
       </Sidebar>
     </div>

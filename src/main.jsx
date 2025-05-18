@@ -2,11 +2,11 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { SidebarProvider } from "./components/ui/sidebar.jsx";
+import SidebarProvider from "./contexts/SidebarContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false}>
       <App />
     </SidebarProvider>
   </StrictMode>
