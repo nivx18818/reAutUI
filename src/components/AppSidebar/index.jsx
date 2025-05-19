@@ -46,6 +46,7 @@ function AppSidebar({ className }) {
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarHeader>
+
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupContent>
@@ -55,7 +56,7 @@ function AppSidebar({ className }) {
                     <SidebarMenuButton
                       isActive={num === 1}
                       tooltip={`Scenario ${num}`}
-                      className="has-[:hover]:!bg-sidebar"
+                      className={open && "has-[:hover]:!bg-sidebar"}
                     >
                       <TvMinimal />
                       <span className="text-sm whitespace-nowrap">

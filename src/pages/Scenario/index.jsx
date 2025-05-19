@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Database } from "lucide-react";
 
 function Scenario() {
   return (
@@ -18,22 +19,9 @@ function Scenario() {
         />
       </div>
 
-      <Button className="w-full bg-[#0f172a] hover:bg-[#1e293b] text-white">
-        <svg
-          className="w-4 h-4 mr-2"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 4V20M4 12H20"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-        INPUT TEST DATA
+      <Button className="w-full">
+        <Database />
+        <span>INPUT TEST DATA</span>
       </Button>
     </div>
   );

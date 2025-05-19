@@ -7,7 +7,7 @@ import LogoWithText from "/logo-with-text.svg";
 import tabs from "./tabs";
 
 function App() {
-  const [activeTab, setActiveTab] = useState("scenario");
+  const [activeTab, setActiveTab] = useState("locators");
   const CurrentTabComponent = tabs[activeTab].component;
 
   const handleTabChange = (tab) => {
@@ -20,15 +20,19 @@ function App() {
         <img src={LogoWithText} alt="Logo" className="w-32 h-8" />
       </div>
 
-      <AppSidebar />
-
       {/* Main Content */}
-      <div className={cn("flex flex-col flex-1", activeTab === "scenario" ? "mt-32" : "mt-24")}>
+      <div
+        className={cn(
+          "flex flex-col flex-1",
+          activeTab === "scenario" ? "mt-32" : "mt-24"
+        )}
+      >
         <div className="flex-1 p-6">
           <CurrentTabComponent />
         </div>
       </div>
 
+      <AppSidebar className="h-4/5 top-[10%]" />
       <AppMenubar activeTab={activeTab} handleTabChange={handleTabChange} />
     </div>
   );

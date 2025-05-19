@@ -14,7 +14,7 @@ const tabs = {
   testData: {
     icon: BadgeCheck,
     component: TestData,
-    label: "TestData",
+    label: "Test Data",
     value: "testData",
   },
   locators: {
