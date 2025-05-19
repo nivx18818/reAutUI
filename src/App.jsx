@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { cn } from "./lib/utils";
 
+import { Slide, ToastContainer } from "react-toastify";
+import { BadgeCheck } from "lucide-react";
+
 import AppMenubar from "./components/AppMenubar";
 import AppSidebar from "./components/AppSidebar";
 import LogoWithText from "/logo-with-text.svg";
 import tabs from "./tabs";
 
 function App() {
-  const [activeTab, setActiveTab] = useState("locators");
+  const [activeTab, setActiveTab] = useState("script");
   const CurrentTabComponent = tabs[activeTab].component;
 
   const handleTabChange = (tab) => {
@@ -23,7 +26,7 @@ function App() {
       {/* Main Content */}
       <div
         className={cn(
-          "flex flex-col flex-1",
+          "w-full flex flex-col flex-1",
           activeTab === "scenario" ? "mt-32" : "mt-24"
         )}
       >
@@ -34,6 +37,30 @@ function App() {
 
       <AppSidebar className="h-4/5 top-[10%]" />
       <AppMenubar activeTab={activeTab} handleTabChange={handleTabChange} />
+
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        limit={2}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick={false}
+        closeButton={false}
+        rtl={false}
+        pauseOnFocusLoss={false}
+        pauseOnHover={false}
+        theme="colored"
+        transition={Slide}
+        className="text-sm select-none"
+        icon={({ type }) => {
+          switch (type) {
+            case "success":
+              return <BadgeCheck />;
+            default:
+              return null;
+          }
+        }}
+      />
     </div>
   );
 }

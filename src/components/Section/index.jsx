@@ -4,7 +4,7 @@ function Section({ children, heading, className }) {
   return (
     <div
       className={clsx(
-        "max-w-5xl p-2.5 mx-auto rounded-xl bg-white bg-border-dashed",
+        "w-full max-w-5xl p-2.5 mx-auto rounded-xl bg-white bg-border-dashed",
         className
       )}
     >
