@@ -28,9 +28,7 @@ function TestDataTable() {
   ]);
 
   return (
-    <Section>
-      <h2 className="m-4 text-lg font-semibold leading-none">Test Data</h2>
-
+    <Section heading="Test Data">
       <div className="max-w-3xl">
         <Table>
           <TableHeader>

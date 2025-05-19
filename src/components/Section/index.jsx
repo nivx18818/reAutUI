@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-function Section({ children, className }) {
+function Section({ children, heading, className }) {
   return (
     <div
       className={clsx(
@@ -8,6 +8,9 @@ function Section({ children, className }) {
         className
       )}
     >
+      {heading && (
+        <h2 className="m-4 text-lg font-semibold leading-none">{heading}</h2>
+      )}
       {children}
     </div>
   );
