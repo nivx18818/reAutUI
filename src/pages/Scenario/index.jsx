@@ -1,23 +1,33 @@
+import { Database } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Database } from "lucide-react";
+import useScenario from "@/hooks/useScenario";
 
 function Scenario() {
+  const { scenarios, currentScenarioIndex } = useScenario();
+  const currentScenario = scenarios[currentScenarioIndex];
+
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      <div>
-        <label className="block mb-2 text-sm font-medium">URL</label>
-        <Input placeholder="Enter your web URL" />
-      </div>
-
-      <div>
-        <label className="block mb-2 text-sm font-medium">Description</label>
-        <Textarea
-          placeholder="Enter detailed description of the scenario"
-          className="min-h-[150px] resize-none"
+      <label className="block space-y-2">
+        <span className="text-sm font-medium">URL</span>
+        <Input
+          name="url"
+          placeholder="Enter your web URL"
+          defaultValue={currentScenario.url}
         />
-      </div>
+      </label>
+
+      <label className="block space-y-2">
+        <span className="text-sm font-medium">Description</span>
+        <Textarea
+          name="scenarioDescription"
+          placeholder="Enter detailed description of the scenario"
+          defaultValue={currentScenario.description}
+          className="resize-none min-h-40"
+        />
+      </label>
 
       <Button className="w-full">
         <Database />
