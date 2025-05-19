@@ -13,10 +13,10 @@ function AppMenubar({ activeTab, handleTabChange }) {
             <MenubarTrigger
               onClick={() => handleTabChange(value)}
               className={cn(
-                "flex items-center gap-2 px-3 py-1.5 text-sm font-medium cursor-pointer rounded-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                "flex items-center gap-2 px-3 py-1.5 text-sm font-medium cursor-pointer rounded-sm transition-colors",
                 activeTab === value
                   ? "bg-background text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-accent-foreground"
+                  : "text-muted-foreground"
               )}
             >
               <IconComponent className="w-4" />

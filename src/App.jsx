@@ -10,7 +10,7 @@ import LogoWithText from "/logo-with-text.svg";
 import tabs from "./tabs";
 
 function App() {
-  const [activeTab, setActiveTab] = useState("script");
+  const [activeTab, setActiveTab] = useState(Object.keys(tabs)[0]);
   const CurrentTabComponent = tabs[activeTab].component;
 
   const handleTabChange = (tab) => {

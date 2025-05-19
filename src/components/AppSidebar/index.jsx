@@ -1,5 +1,5 @@
+import { memo } from "react";
 import { PanelLeftClose, Save, TvMinimal } from "lucide-react";
-import Logo from "/logo.svg";
 
 import {
   Sidebar,
@@ -14,8 +14,12 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import useSidebar from "@/hooks/use-sidebar";
+import useScenario from "@/hooks/useScenario";
+import Logo from "/logo.svg";
 
 function AppSidebar({ className }) {
+  const { scenarios, currentScenarioIndex, setCurrentScenarioIndex } =
+    useScenario();
   const { open } = useSidebar();
 
   return (
@@ -51,17 +55,16 @@ function AppSidebar({ className }) {
           <SidebarGroup>
             <SidebarGroupContent>
               <SidebarMenu>
-                {[1, 2].map((num) => (
-                  <SidebarMenuItem key={num}>
+                {scenarios.map(({ id, name }, index) => (
+                  <SidebarMenuItem key={id}>
                     <SidebarMenuButton
-                      isActive={num === 1}
-                      tooltip={`Scenario ${num}`}
+                      isActive={index === currentScenarioIndex}
+                      tooltip={name}
                       className={open && "has-[:hover]:!bg-sidebar"}
+                      onClick={() => setCurrentScenarioIndex(index)}
                     >
                       <TvMinimal />
-                      <span className="text-sm whitespace-nowrap">
-                        Scenario {num}
-                      </span>
+                      <span className="text-sm whitespace-nowrap">{name}</span>
                       <SidebarMenuAction asChild>
                         <span>
                           <Save />
@@ -79,4 +82,4 @@ function AppSidebar({ className }) {
   );
 }
 
-export default AppSidebar;
+export default memo(AppSidebar);

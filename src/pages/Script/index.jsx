@@ -1,8 +1,8 @@
-import Section from "@/components/Section";
+import { toast } from "react-toastify";
+import { Copy, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Copy, Download } from "lucide-react";
-import { toast } from "react-toastify";
+import Section from "@/components/Section";
 
 const script = `
   import unittest
