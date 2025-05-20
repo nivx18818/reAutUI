@@ -1,15 +1,14 @@
 import { Database } from "lucide-react";
+import { useCurrentScenario } from "@/hooks/useScenario";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import useScenario from "@/hooks/useScenario";
 
 function Scenario() {
-  const { scenarios, currentScenarioIndex } = useScenario();
-  const currentScenario = scenarios[currentScenarioIndex];
+  const currentScenario = useCurrentScenario();
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div key={currentScenario.id} className="max-w-2xl mx-auto space-y-6">
       <label className="block space-y-2">
         <span className="text-sm font-medium">URL</span>
         <Input

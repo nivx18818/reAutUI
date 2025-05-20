@@ -5,7 +5,7 @@ const ScenarioContext = createContext(null);
 
 function ScenarioProvider({ children }) {
   const [scenarios, setScenarios] = useState([]);
-  const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0);
+  const [currentScenarioId, setCurrentScenarioId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -15,6 +15,7 @@ function ScenarioProvider({ children }) {
       const res = await httpRequest.get("/scenarios");
       if (res) {
         setScenarios(res);
+        setCurrentScenarioId(res[0].id);
       }
 
       setIsLoading(false);
@@ -25,8 +26,8 @@ function ScenarioProvider({ children }) {
   const contextValue = {
     scenarios,
     setScenarios,
-    currentScenarioIndex,
-    setCurrentScenarioIndex,
+    currentScenarioId,
+    setCurrentScenarioId,
   };
 
   if (isLoading) return null;

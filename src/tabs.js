@@ -9,25 +9,25 @@ const tabs = {
     icon: TvMinimal,
     component: Scenario,
     label: "Scenario",
-    value: "scenario",
+    path: "scenario",
   },
   testData: {
     icon: BadgeCheck,
     component: TestData,
     label: "Test Data",
-    value: "testData",
+    path: "test-data",
   },
   locators: {
     icon: SquareDashed,
     component: Locators,
     label: "Locators",
-    value: "locators",
+    path: "locators",
   },
   script: {
     icon: Terminal,
     component: Script,
     label: "Script",
-    value: "script",
+    path: "script",
   },
 };
 

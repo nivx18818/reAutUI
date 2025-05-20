@@ -1,15 +1,18 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import SidebarProvider from "./contexts/SidebarContext";
+import { BrowserRouter } from "react-router";
+import AppRouter from "./components/AppRouter";
 import ScenarioProvider from "./contexts/ScenarioContext";
-import App from "./App";
+import SidebarProvider from "./contexts/SidebarContext";
 import "./globals.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <SidebarProvider defaultOpen={false}>
       <ScenarioProvider>
-        <App />
+        <BrowserRouter>
+          <AppRouter />
+        </BrowserRouter>
       </ScenarioProvider>
     </SidebarProvider>
   </StrictMode>

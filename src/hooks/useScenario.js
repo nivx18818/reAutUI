@@ -11,4 +11,11 @@ const useScenario = () => {
   return context;
 };
 
+const useCurrentScenario = () => {
+  const { scenarios, currentScenarioId } = useScenario();
+  const currentScenario = scenarios.find(({ id }) => id === currentScenarioId);
+  return currentScenario;
+};
+
 export default useScenario;
+export { useCurrentScenario };

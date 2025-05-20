@@ -17,9 +17,8 @@ import useSidebar from "@/hooks/use-sidebar";
 import useScenario from "@/hooks/useScenario";
 import Logo from "/logo.svg";
 
-function AppSidebar({ className }) {
-  const { scenarios, currentScenarioIndex, setCurrentScenarioIndex } =
-    useScenario();
+function AppSidebar({ className, handleScenarioChange }) {
+  const { scenarios, currentScenarioId } = useScenario();
   const { open } = useSidebar();
 
   return (
@@ -55,24 +54,29 @@ function AppSidebar({ className }) {
           <SidebarGroup>
             <SidebarGroupContent>
               <SidebarMenu>
-                {scenarios.map(({ id, name }, index) => (
-                  <SidebarMenuItem key={id}>
-                    <SidebarMenuButton
-                      isActive={index === currentScenarioIndex}
-                      tooltip={name}
-                      className={open && "has-[:hover]:!bg-sidebar"}
-                      onClick={() => setCurrentScenarioIndex(index)}
-                    >
-                      <TvMinimal />
-                      <span className="text-sm whitespace-nowrap">{name}</span>
-                      <SidebarMenuAction asChild>
-                        <span>
-                          <Save />
+                {scenarios.map(({ id, name }) => {
+                  const isActive = id === currentScenarioId;
+                  return (
+                    <SidebarMenuItem key={id}>
+                      <SidebarMenuButton
+                        isActive={isActive}
+                        tooltip={name}
+                        className={open && "has-[:hover]:!bg-sidebar"}
+                        onClick={() => !isActive && handleScenarioChange(id)}
+                      >
+                        <TvMinimal />
+                        <span className="text-sm whitespace-nowrap">
+                          {name}
                         </span>
-                      </SidebarMenuAction>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+                        <SidebarMenuAction asChild>
+                          <span>
+                            <Save />
+                          </span>
+                        </SidebarMenuAction>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
