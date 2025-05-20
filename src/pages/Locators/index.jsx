@@ -7,43 +7,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useCurrentScenario } from "@/hooks/useScenario";
 import { cn } from "@/lib/utils";
 
-const locators = [
-  {
-    query: "password",
-    xpath: "/html/body/div/div/div[2]/div[1]/div/div/form/div[2]/input",
-    isCorrect: true,
-  },
-  {
-    query: "book a demo",
-    xpath:
-      "/html/body/div[1]/div[3]/div/div/div[1]/div/div[1]/div[3]/div/div[2]/a",
-    isCorrect: true,
-  },
-  {
-    query: "about",
-    xpath: "/html/body/div/div/div[1]/div[1]/div[1]/div/div[2]/div[1]/nav/a[2]",
-    isCorrect: true,
-  },
-  {
-    query: "login",
-    xpath: "/html/body/div/div/div[2]/div[1]/div/div/form/input",
-    isCorrect: true,
-  },
-  {
-    query: "menu",
-    xpath: "/html/body/div/div/div[1]/div[1]/div[1]/div/div[1]/div/button",
-    isCorrect: true,
-  },
-  {
-    query: "username",
-    xpath: "/html/body/div/div/div[2]/div[1]/div/div/form/div[1]/input",
-    isCorrect: true,
-  },
-];
-
 function Locators() {
+  const locators = useCurrentScenario()?.locatorList;
+
   return (
     <Section heading="Locator Results">
       <Table>
@@ -54,16 +23,16 @@ function Locators() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {locators.map(({ query, xpath, isCorrect }) => (
-            <TableRow key={query}>
-              <TableCell>{query}</TableCell>
+          {locators.map(({ description, xpath }) => (
+            <TableRow key={description}>
+              <TableCell>{description}</TableCell>
               <TableCell
                 className={cn(
                   "font-mono",
-                  isCorrect ? "text-green-600" : "text-red-600"
+                  xpath !== "FALSE" ? "text-green-600" : "text-red-600"
                 )}
               >
-                {xpath}
+                {xpath !== "FALSE" ? xpath : "Can't find element locator"}
               </TableCell>
             </TableRow>
           ))}

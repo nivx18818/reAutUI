@@ -1,10 +1,12 @@
-import { Database } from "lucide-react";
+import { useNavigate } from "react-router";
 import { useCurrentScenario } from "@/hooks/useScenario";
+import { Database } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 function Scenario() {
+  const navigate = useNavigate();
   const currentScenario = useCurrentScenario();
 
   return (
@@ -28,7 +30,7 @@ function Scenario() {
         />
       </label>
 
-      <Button className="w-full">
+      <Button className="w-full" onClick={() => navigate("../test-data")}>
         <Database />
         <span>INPUT TEST DATA</span>
       </Button>

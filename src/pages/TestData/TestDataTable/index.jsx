@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Pencil, Play, Trash2 } from "lucide-react";
 import Section from "@/components/Section";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,12 +9,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Pencil, Play, Trash2 } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useCurrentScenario } from "@/hooks/useScenario";
 
 const functionButtons = [
   { icon: Play, tooltip: "Generate script" },
@@ -23,9 +23,7 @@ const functionButtons = [
 ];
 
 function TestDataTable() {
-  const [testData, _setTestData] = useState([
-    { id: 1, valid_username: "standard_user", valid_password: "secret_sauce" },
-  ]);
+  const testData = useCurrentScenario()?.dataSetList;
 
   return (
     <Section heading="Test Data">
@@ -41,11 +39,11 @@ function TestDataTable() {
           </TableHeader>
 
           <TableBody>
-            {testData.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.id}</TableCell>
-                <TableCell>{row.valid_username}</TableCell>
-                <TableCell>{row.valid_password}</TableCell>
+            {testData.map((data, index) => (
+              <TableRow key={index}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>{data[0]}</TableCell>
+                <TableCell>{data[1]}</TableCell>
                 <TableCell>
                   <div className="flex items-center justify-end gap-2">
                     {functionButtons.map((button) => (
