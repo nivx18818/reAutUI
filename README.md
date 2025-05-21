@@ -1,12 +1,68 @@
-# React + Vite
+# reAutUI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React application built with Vite and styled with Tailwind CSS. This project is a web application focused on UI testing.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19**
+- **Vite**
+- **Tailwind CSS**
+- **React Router**
+- **ESLint**
+- **shadcn/ui** (for accessible UI components)
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+- Node.js (v18.x or later recommended)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone <repository-url>
+    cd reAutUI
+    ```
+
+2. Install NPM packages:
+
+    ```bash
+    npm install
+    ```
+
+    or if you use yarn:
+
+    ```bash
+    yarn install
+    ```
+
+### Running the Project
+
+To start the development server:
+
+```bash
+npm run dev
+```
+
+This will run the app in development mode. Open [http://localhost:5173](http://localhost:5173) (or the port specified in your Vite config/console output) to view it in the browser. The page will reload if you make edits.
+
+## Available Scripts
+
+In the project directory, you can run:
+
+- `npm run dev`: Runs the app in the development mode.
+- `npm run build`: Builds the app for production to the `dist` folder.
+- `npm run lint`: Lints the project files using ESLint.
+- `npm run preview`: Serves the production build locally for preview.
+
+## Learn More
+
+- [Vite Documentation](https://vitejs.dev/)
+- [React Documentation](https://react.dev/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/)
+- [shadcn/ui Documentation](https://ui.shadcn.com/docs)
