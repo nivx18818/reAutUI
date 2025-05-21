@@ -38,6 +38,7 @@ function ScenarioProvider({ children }) {
     currentScenarioId,
     setCurrentScenarioId,
     updateScenarioInContext,
+    isLoading,
     setIsLoading,
   };
 
