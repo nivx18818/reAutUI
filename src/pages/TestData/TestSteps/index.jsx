@@ -40,7 +40,7 @@ function TestSteps({ handleAddTestData }) {
         </div>
 
         <div className="space-y-4">
-          {testSteps.map(({ type, description }, index) => (
+          {testSteps?.map(({ type, description }, index) => (
             <div key={index} className="flex items-center gap-4">
               <Badge
                 variant="outline"

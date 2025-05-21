@@ -14,7 +14,7 @@ import FunctionButtons from "./FunctionButtons";
 
 function TestDataTable({ testData, handleEditTestData, handleDeleteTestData }) {
   const parsedActionList = useCurrentScenario()?.parsedActionList;
-  const fillActions = parsedActionList.filter(
+  const fillActions = parsedActionList?.filter(
     (action) => action.type === "FILL"
   );
 
@@ -32,7 +32,7 @@ function TestDataTable({ testData, handleEditTestData, handleDeleteTestData }) {
     setEditingRowIndex(null);
   };
 
-  if (fillActions.length === 0) return null;
+  if (fillActions?.length === 0) return null;
 
   return (
     <Section heading="Test Data">
@@ -41,7 +41,7 @@ function TestDataTable({ testData, handleEditTestData, handleDeleteTestData }) {
           <TableHeader>
             <TableRow>
               <TableHead className="w-16">No</TableHead>
-              {fillActions.map(({ description }, index) => (
+              {fillActions?.map(({ description }, index) => (
                 <TableHead key={index}>{description}</TableHead>
               ))}
               <TableHead></TableHead>

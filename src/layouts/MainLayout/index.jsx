@@ -44,7 +44,7 @@ function MainLayout() {
       <div className="fixed top-0 left-0 bottom-0 right-0 bg-[#f8fafc] bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] bg-[size:50px_50px]"></div>
 
       <div className="relative flex w-full min-h-screen px-28">
-        <div className="absolute top-5 ">
+        <div className="absolute top-5">
           <img
             src={LogoWithText}
             alt="Logo"

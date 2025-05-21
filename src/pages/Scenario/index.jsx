@@ -10,13 +10,13 @@ function Scenario() {
   const currentScenario = useCurrentScenario();
 
   return (
-    <div key={currentScenario.id} className="max-w-2xl mx-auto space-y-6">
+    <div key={currentScenario?.id} className="max-w-2xl mx-auto space-y-6">
       <label className="block space-y-2">
         <span className="text-sm font-medium">URL</span>
         <Input
           name="url"
           placeholder="Enter your web URL"
-          defaultValue={currentScenario.url}
+          defaultValue={currentScenario?.url}
         />
       </label>
 
@@ -25,7 +25,7 @@ function Scenario() {
         <Textarea
           name="scenarioDescription"
           placeholder="Enter detailed description of the scenario"
-          defaultValue={currentScenario.description}
+          defaultValue={currentScenario?.description}
           className="resize-none min-h-40"
         />
       </label>

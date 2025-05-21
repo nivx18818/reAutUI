@@ -1,22 +1,42 @@
-import { useCallback, useState } from "react";
-import { useCurrentScenario } from "@/hooks/useScenario";
+import { useCallback, useEffect, useState } from "react";
+import useScenario, { useCurrentScenario } from "@/hooks/useScenario";
+import httpRequest from "@/utils/httpRequest";
 import TestDataTable from "./TestDataTable";
 import TestSteps from "./TestSteps";
-import httpRequest from "@/utils/httpRequest";
 
 function TestData() {
   const currentScenario = useCurrentScenario();
-  const [testData, setTestData] = useState(currentScenario?.dataSetList);
+  const { updateScenarioInContext } = useScenario();
+  const [testData, setTestData] = useState([]);
+
+  useEffect(() => {
+    setTestData(currentScenario?.dataSetList ?? []);
+  }, [currentScenario]);
 
   const handleChangeTestData = useCallback(
     async (updatedTestData) => {
+      if (!currentScenario?.id) {
+        console.error(
+          "Cannot update test data: current scenario or ID is missing."
+        );
+        return;
+      }
+
       setTestData(updatedTestData);
-      await httpRequest.put(`/scenarios/${currentScenario?.id}`, {
+
+      const updatedScenarioData = {
         ...currentScenario,
         dataSetList: updatedTestData,
-      });
+      };
+
+      await httpRequest.put(
+        `/scenarios/${currentScenario?.id}`,
+        updatedScenarioData
+      );
+
+      updateScenarioInContext(updatedScenarioData);
     },
-    [currentScenario]
+    [currentScenario, updateScenarioInContext]
   );
 
   const handleAddTestData = async (data) => {

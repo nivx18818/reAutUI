@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import httpRequest from "@/utils/httpRequest";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const ScenarioContext = createContext(null);
 
@@ -23,18 +24,27 @@ function ScenarioProvider({ children }) {
     fetchScenarios();
   }, []);
 
+  const updateScenarioInContext = (updatedScenario) => {
+    setScenarios(
+      scenarios.map((scenario) =>
+        scenario.id === updatedScenario.id ? updatedScenario : scenario
+      )
+    );
+  };
+
   const contextValue = {
     scenarios,
     setScenarios,
     currentScenarioId,
     setCurrentScenarioId,
+    updateScenarioInContext,
+    setIsLoading,
   };
-
-  if (isLoading) return null;
 
   return (
     <ScenarioContext.Provider value={contextValue}>
       {children}
+      {isLoading && <LoadingScreen />}
     </ScenarioContext.Provider>
   );
 }

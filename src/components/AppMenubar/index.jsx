@@ -16,7 +16,7 @@ function AppMenubar({ activeTab, handleTabChange }) {
             <MenubarTrigger
               onClick={() => handleTabChange(path)}
               className={cn(
-                "flex items-center gap-2 px-3 py-1.5 text-sm font-medium cursor-pointer rounded-sm transition-colors",
+                "flex items-center gap-2 px-3 py-1.5 text-sm font-medium cursor-pointer rounded-sm transition-colors whitespace-nowrap",
                 activeTab === path
                   ? "bg-background text-foreground shadow-sm"
                   : "text-muted-foreground hover:text-accent-foreground"

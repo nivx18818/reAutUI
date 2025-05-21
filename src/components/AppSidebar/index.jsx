@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { PanelLeftClose, Save, TvMinimal } from "lucide-react";
+import { PanelLeftClose, Plus, Save, Trash2, TvMinimal } from "lucide-react";
 
 import {
   Sidebar,
@@ -16,6 +16,7 @@ import {
 import useSidebar from "@/hooks/use-sidebar";
 import useScenario from "@/hooks/useScenario";
 import Logo from "/logo.svg";
+import { Button } from "../ui/button";
 
 function AppSidebar({ className, handleScenarioChange }) {
   const { scenarios, currentScenarioId } = useScenario();
@@ -80,13 +81,19 @@ function AppSidebar({ className, handleScenarioChange }) {
                         </span>
                         <SidebarMenuAction asChild>
                           <span>
-                            <Save />
+                            <Trash2 className="text-destructive hover:text-destructive/90" />
                           </span>
                         </SidebarMenuAction>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   );
                 })}
+                <SidebarMenuItem className="group-data-[collapsible=icon]:hidden">
+                  <Button variant="ghost" size="sm" className="w-full">
+                    <Plus />
+                    <span>Add Scenario</span>
+                  </Button>
+                </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
