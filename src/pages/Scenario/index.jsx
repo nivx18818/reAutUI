@@ -15,14 +15,24 @@ function Scenario() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    const parsedActionList = await httpRequest.post(
+      "/scenario/parse",
+      data.description
+    );
+
     const updatedScenarioData = {
       ...currentScenario,
-      ...Object.fromEntries(formData),
+      ...data,
+      parsedActionList,
     };
+
     await httpRequest.put(
       `/scenarios/${currentScenario.id}`,
       updatedScenarioData
     );
+
     updateScenarioInContext(updatedScenarioData);
     navigate("../test-data");
   };
