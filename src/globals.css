@@ -50,8 +50,8 @@
         --sidebar-ring: 217.2 91.2% 59.8%;
 
         /* React-Toastify */
-        --toastify-color-success: #d4edda;
-        --toastify-text-color-success: #15696d;
+        --toastify-color-success: theme("colors.green.50");
+        --toastify-text-color-success: theme("colors.green.700");
         --toastify-toast-width: fit-content;
         --toastify-toast-min-height: fit-content;
         --toastify-toast-padding: 10px;
@@ -103,8 +103,13 @@
 
 @layer base {
     /* * {
-    @apply border-border;
-  } */
+        @apply border-border;
+    } */
+
+    html {
+        scrollbar-width: none;
+    }
+
     body {
         @apply bg-background text-foreground;
     }

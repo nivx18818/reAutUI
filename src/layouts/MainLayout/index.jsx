@@ -39,7 +39,7 @@ function MainLayout() {
   };
 
   return (
-    <div className="flex h-screen bg-[#f8fafc] bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] bg-[size:50px_50px] relative w-full px-28">
+    <div className="flex min-h-screen bg-[#f8fafc] bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] bg-[size:50px_50px] relative w-full px-28">
       <div className="absolute top-5">
         <img src={LogoWithText} alt="Logo" className="w-32 h-8" />
       </div>
@@ -47,7 +47,7 @@ function MainLayout() {
       {/* Main Content */}
       <div
         className={cn(
-          "w-full flex flex-col flex-1",
+          "w-full flex flex-col flex-1 pb-20",
           activeTab === "scenario" ? "mt-32" : "mt-24"
         )}
       >
