@@ -39,58 +39,63 @@ function MainLayout() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#f8fafc] bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] bg-[size:50px_50px] relative w-full px-28">
-      <div className="absolute top-5 ">
-        <img
-          src={LogoWithText}
-          alt="Logo"
-          className="w-32 h-8 select-none"
-          draggable="false"
+    <>
+      {/* Background */}
+      <div className="fixed top-0 left-0 bottom-0 right-0 bg-[#f8fafc] bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+
+      <div className="relative flex w-full min-h-screen px-28">
+        <div className="absolute top-5 ">
+          <img
+            src={LogoWithText}
+            alt="Logo"
+            className="w-32 h-8 select-none"
+            draggable="false"
+          />
+        </div>
+
+        {/* Main Content */}
+        <div
+          className={cn(
+            "w-full flex flex-col flex-1 pb-20",
+            activeTab === "scenario" ? "mt-32" : "mt-24"
+          )}
+        >
+          <div className="flex-1 p-6">
+            <Outlet />
+          </div>
+        </div>
+
+        <AppSidebar
+          className="h-4/5 top-[10%]"
+          handleScenarioChange={handleScenarioChange}
+        />
+        <AppMenubar activeTab={activeTab} handleTabChange={handleTabChange} />
+
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          limit={2}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick={false}
+          closeButton={false}
+          rtl={false}
+          pauseOnFocusLoss={false}
+          pauseOnHover={false}
+          theme="colored"
+          transition={Slide}
+          className="text-sm select-none"
+          icon={({ type }) => {
+            switch (type) {
+              case "success":
+                return <BadgeCheck />;
+              default:
+                return null;
+            }
+          }}
         />
       </div>
-
-      {/* Main Content */}
-      <div
-        className={cn(
-          "w-full flex flex-col flex-1 pb-20",
-          activeTab === "scenario" ? "mt-32" : "mt-24"
-        )}
-      >
-        <div className="flex-1 p-6">
-          <Outlet />
-        </div>
-      </div>
-
-      <AppSidebar
-        className="h-4/5 top-[10%]"
-        handleScenarioChange={handleScenarioChange}
-      />
-      <AppMenubar activeTab={activeTab} handleTabChange={handleTabChange} />
-
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        limit={2}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick={false}
-        closeButton={false}
-        rtl={false}
-        pauseOnFocusLoss={false}
-        pauseOnHover={false}
-        theme="colored"
-        transition={Slide}
-        className="text-sm select-none"
-        icon={({ type }) => {
-          switch (type) {
-            case "success":
-              return <BadgeCheck />;
-            default:
-              return null;
-          }
-        }}
-      />
-    </div>
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import * as httpRequest from "@/utils/httpRequest";
+import httpRequest from "@/utils/httpRequest";
 
 const ScenarioContext = createContext(null);
 

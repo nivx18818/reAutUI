@@ -1,6 +1,4 @@
-import { Pencil, Play, Trash2 } from "lucide-react";
 import Section from "@/components/Section";
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -9,71 +7,80 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { useCurrentScenario } from "@/hooks/useScenario";
+import { memo, useState } from "react";
+import { Input } from "@/components/ui/input";
+import FunctionButtons from "./FunctionButtons";
 
-const functionButtons = [
-  { icon: Play, tooltip: "Generate script" },
-  { icon: Pencil, tooltip: "Edit" },
-  { icon: Trash2, tooltip: "Delete" },
-];
+function TestDataTable({ testData, handleEditTestData, handleDeleteTestData }) {
+  const parsedActionList = useCurrentScenario()?.parsedActionList;
+  const fillActions = parsedActionList.filter(
+    (action) => action.type === "FILL"
+  );
 
-function TestDataTable() {
-  const testData = useCurrentScenario()?.dataSetList;
+  const [editingRowIndex, setEditingRowIndex] = useState(null);
+
+  const handleEdit = (index) => {
+    setEditingRowIndex(index);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    handleEditTestData(editingRowIndex, data);
+    setEditingRowIndex(null);
+  };
+
+  if (fillActions.length === 0) return null;
 
   return (
     <Section heading="Test Data">
-      <div className="max-w-3xl">
-        <Table>
+      <form className="max-w-2xl" onSubmit={handleSubmit}>
+        <Table className="table-fixed">
           <TableHeader>
             <TableRow>
               <TableHead className="w-16">No</TableHead>
-              <TableHead>valid_username</TableHead>
-              <TableHead>valid_password</TableHead>
-              <TableHead className="w-28"></TableHead>
+              {fillActions.map(({ description }, index) => (
+                <TableHead key={index}>{description}</TableHead>
+              ))}
+              <TableHead></TableHead>
             </TableRow>
           </TableHeader>
 
           <TableBody>
-            {testData.map((data, index) => (
-              <TableRow key={index}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{data[0]}</TableCell>
-                <TableCell>{data[1]}</TableCell>
+            {testData.map((data, rowIndex) => (
+              <TableRow key={rowIndex}>
+                <TableCell>{rowIndex + 1}</TableCell>
+                {data.map((value, cellIndex) => (
+                  <TableCell key={cellIndex}>
+                    {editingRowIndex === rowIndex ? (
+                      <Input
+                        name={fillActions[cellIndex].description}
+                        defaultValue={value}
+                        required
+                        autoComplete="true"
+                      />
+                    ) : (
+                      value
+                    )}
+                  </TableCell>
+                ))}
                 <TableCell>
-                  <div className="flex items-center justify-end gap-2">
-                    {functionButtons.map((button) => (
-                      <Tooltip key={button.tooltip}>
-                        <TooltipTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className={
-                              button.icon === Trash2 &&
-                              "text-destructive hover:text-destructive/90"
-                            }
-                          >
-                            <button.icon />
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{button.tooltip}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    ))}
-                  </div>
+                  <FunctionButtons
+                    rowIndex={rowIndex}
+                    editingRowIndex={editingRowIndex}
+                    handleEdit={handleEdit}
+                    handleDeleteTestData={handleDeleteTestData}
+                  />
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-      </div>
+      </form>
     </Section>
   );
 }
 
-export default TestDataTable;
+export default memo(TestDataTable);
