@@ -35,11 +35,21 @@ function AppSidebar({ className, handleScenarioChange }) {
               >
                 {!open ? (
                   <SidebarTrigger>
-                    <img src={Logo} alt="Logo" className="w-8 h-8" />
+                    <img
+                      src={Logo}
+                      alt="Logo"
+                      className="w-8 h-8 select-none"
+                      draggable="false"
+                    />
                   </SidebarTrigger>
                 ) : (
                   <div className="flex items-center justify-between">
-                    <img src={Logo} alt="Logo" className="w-8 h-8" />
+                    <img
+                      src={Logo}
+                      alt="Logo"
+                      className="w-8 h-8 select-none"
+                      draggable="false"
+                    />
                     <SidebarTrigger>
                       <PanelLeftClose />
                     </SidebarTrigger>

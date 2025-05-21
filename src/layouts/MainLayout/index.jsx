@@ -40,8 +40,13 @@ function MainLayout() {
 
   return (
     <div className="flex min-h-screen bg-[#f8fafc] bg-[linear-gradient(to_right,#0000001a_1px,transparent_1px),linear-gradient(to_bottom,#0000001a_1px,transparent_1px)] bg-[size:50px_50px] relative w-full px-28">
-      <div className="absolute top-5">
-        <img src={LogoWithText} alt="Logo" className="w-32 h-8" />
+      <div className="absolute top-5 ">
+        <img
+          src={LogoWithText}
+          alt="Logo"
+          className="w-32 h-8 select-none"
+          draggable="false"
+        />
       </div>
 
       {/* Main Content */}
