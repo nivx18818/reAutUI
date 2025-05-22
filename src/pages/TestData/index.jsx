@@ -49,11 +49,11 @@ function TestData() {
     handleChangeTestData(updatedTestData);
   };
 
-  const handleGenerateScript = async (currentRowIndex) => {
+  const handleGenerateScript = async (currentRowIndex = 0) => {
     setIsLoading(true);
 
     const currentRowData =
-      currentScenario?.dataSetList ??
+      currentScenario?.dataSetList &&
       currentScenario?.dataSetList[currentRowIndex];
     let dataIndex = 0;
 
@@ -66,6 +66,8 @@ function TestData() {
       }
       return action;
     });
+
+    console.log("reached here");
 
     const res = await httpRequest.post("/script/generate", {
       url: currentScenario?.url,
@@ -89,7 +91,7 @@ function TestData() {
       setIsLoading(false);
       navigate("../script");
     } else if (res?.error) {
-      toast.error("Error: " + res.error);
+      toast.error("Unexpected error occurred while generating the script.");
     }
 
     setIsLoading(false);
