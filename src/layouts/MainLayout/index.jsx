@@ -1,7 +1,7 @@
 import { Outlet, useLocation, useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { Slide, ToastContainer } from "react-toastify";
-import { BadgeCheck } from "lucide-react";
+import { BadgeCheck, CircleX } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import AppMenubar from "@/components/AppMenubar";
@@ -89,6 +89,8 @@ function MainLayout() {
             switch (type) {
               case "success":
                 return <BadgeCheck />;
+              case "error":
+                return <CircleX />;
               default:
                 return null;
             }

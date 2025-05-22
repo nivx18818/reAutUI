@@ -52,6 +52,8 @@
         /* React-Toastify */
         --toastify-color-success: theme("colors.green.50");
         --toastify-text-color-success: theme("colors.green.700");
+        --toastify-color-error: theme("colors.red.50");
+        --toastify-text-color-error: theme("colors.red.700");
         --toastify-toast-width: fit-content;
         --toastify-toast-min-height: fit-content;
         --toastify-toast-padding: 10px;

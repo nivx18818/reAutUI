@@ -25,8 +25,6 @@ function Scenario() {
       data.description
     );
 
-    console.log(parsedActionList);
-
     if (parsedActionList.error) {
       setParsingError(parsedActionList?.message);
       return;

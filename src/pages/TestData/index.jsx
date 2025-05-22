@@ -4,6 +4,7 @@ import httpRequest from "@/utils/httpRequest";
 import TestDataTable from "./TestDataTable";
 import TestSteps from "./TestSteps";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 function TestData() {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ function TestData() {
     handleChangeTestData(updatedTestData);
   };
 
-  const handleGenerateScript = async (currentRowIndex = 0) => {
+  const handleGenerateScript = async (currentRowIndex) => {
     setIsLoading(true);
 
     const currentRowData =
@@ -84,10 +85,14 @@ function TestData() {
         updatedScenarioData
       );
       updateScenarioInContext(updatedScenarioData);
+
+      setIsLoading(false);
+      navigate("../script");
+    } else if (res?.error) {
+      toast.error("Error: " + res.error);
     }
 
     setIsLoading(false);
-    navigate("../script");
   };
 
   const handleEditTestData = async (index, data) => {
