@@ -12,7 +12,12 @@ import { memo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import FunctionButtons from "./FunctionButtons";
 
-function TestDataTable({ testData, handleEditTestData, handleDeleteTestData }) {
+function TestDataTable({
+  testData,
+  handleGenerateScript,
+  handleEditTestData,
+  handleDeleteTestData,
+}) {
   const currentScenario = useCurrentScenario();
   const parsedActionList = currentScenario?.parsedActionList;
   const parsedActions = Array.isArray(parsedActionList) ? parsedActionList : [];
@@ -32,13 +37,19 @@ function TestDataTable({ testData, handleEditTestData, handleDeleteTestData }) {
     setEditingRowIndex(null);
   };
 
+  if (parsedActionList?.length && !fillActions?.length) {
+    return null;
+  }
+
   return (
     <Section heading="Test Data">
       <form className="max-w-2xl" onSubmit={handleSubmit}>
         <Table className="table-fixed">
           <TableHeader>
             <TableRow>
-              {fillActions.length > 0 && <TableHead className="w-16">No</TableHead>}
+              {fillActions.length > 0 && (
+                <TableHead className="w-16">No</TableHead>
+              )}
               {fillActions?.map(({ description }, index) => (
                 <TableHead key={index}>{description}</TableHead>
               ))}
@@ -68,6 +79,7 @@ function TestDataTable({ testData, handleEditTestData, handleDeleteTestData }) {
                   <FunctionButtons
                     rowIndex={rowIndex}
                     editingRowIndex={editingRowIndex}
+                    handleGenerateScript={handleGenerateScript}
                     handleEdit={handleEdit}
                     handleDeleteTestData={handleDeleteTestData}
                   />

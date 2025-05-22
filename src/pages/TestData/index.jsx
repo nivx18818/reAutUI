@@ -3,10 +3,13 @@ import useScenario, { useCurrentScenario } from "@/hooks/useScenario";
 import httpRequest from "@/utils/httpRequest";
 import TestDataTable from "./TestDataTable";
 import TestSteps from "./TestSteps";
+import { useNavigate } from "react-router";
 
 function TestData() {
+  const navigate = useNavigate();
+
   const currentScenario = useCurrentScenario();
-  const { updateScenarioInContext } = useScenario();
+  const { updateScenarioInContext, setIsLoading } = useScenario();
   const [testData, setTestData] = useState([]);
 
   useEffect(() => {
@@ -45,6 +48,48 @@ function TestData() {
     handleChangeTestData(updatedTestData);
   };
 
+  const handleGenerateScript = async (currentRowIndex = 0) => {
+    setIsLoading(true);
+
+    const currentRowData =
+      currentScenario?.dataSetList ??
+      currentScenario?.dataSetList[currentRowIndex];
+    let dataIndex = 0;
+
+    const actionsWithData = currentScenario?.parsedActionList?.map((action) => {
+      if (action.type === "FILL") {
+        if (dataIndex < currentRowData.length) {
+          return { ...action, data: currentRowData[dataIndex++] };
+        }
+        return { ...action, data: null };
+      }
+      return action;
+    });
+
+    const res = await httpRequest.post("/script/generate", {
+      url: currentScenario?.url,
+      parsedActions: actionsWithData,
+    });
+
+    if (res && res.scriptAndLocatorContainer) {
+      const { script, elementLocatorList } = res.scriptAndLocatorContainer;
+      const updatedScenarioData = {
+        ...currentScenario,
+        script,
+        locatorList: elementLocatorList,
+      };
+
+      await httpRequest.put(
+        `/scenarios/${currentScenario?.id}`,
+        updatedScenarioData
+      );
+      updateScenarioInContext(updatedScenarioData);
+    }
+
+    setIsLoading(false);
+    navigate("../script");
+  };
+
   const handleEditTestData = async (index, data) => {
     const updatedTestData = [
       ...testData.slice(0, index),
@@ -64,9 +109,13 @@ function TestData() {
 
   return (
     <div className="space-y-8">
-      <TestSteps handleAddTestData={handleAddTestData} />
+      <TestSteps
+        handleAddTestData={handleAddTestData}
+        handleGenerateScript={handleGenerateScript}
+      />
       <TestDataTable
         testData={testData}
+        handleGenerateScript={handleGenerateScript}
         handleEditTestData={handleEditTestData}
         handleDeleteTestData={handleDeleteTestData}
       />

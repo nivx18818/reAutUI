@@ -2,7 +2,7 @@ import { memo } from "react";
 import { useCurrentScenario } from "@/hooks/useScenario";
 import { cn } from "@/lib/utils";
 
-import { Plus } from "lucide-react";
+import { Play, Plus } from "lucide-react";
 import Section from "@/components/Section";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,10 +14,11 @@ const actionStyles = {
   SELECT: "bg-yellow-50 text-yellow-700 border-yellow-200",
 };
 
-function TestSteps({ handleAddTestData }) {
+function TestSteps({ handleAddTestData, handleGenerateScript }) {
   const currentScenario = useCurrentScenario();
   const parsedActionList = currentScenario?.parsedActionList;
   const testSteps = Array.isArray(parsedActionList) ? parsedActionList : [];
+  const fillActions = testSteps.filter((action) => action.type === "FILL");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,14 +34,17 @@ function TestSteps({ handleAddTestData }) {
     <Section>
       <form className="p-2.5" onSubmit={handleSubmit}>
         <div className="mb-6">
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-1"
-          >
-            <Plus />
-            <span>ADD DATA</span>
-          </Button>
+          {testSteps.length && !fillActions.length ? (
+            <Button type="button" size="sm" onClick={handleGenerateScript}>
+              <Play />
+              <span>GENERATE SCRIPT</span>
+            </Button>
+          ) : (
+            <Button variant="outline" size="sm">
+              <Plus />
+              <span>ADD DATA</span>
+            </Button>
+          )}
         </div>
 
         <div className="space-y-4">
