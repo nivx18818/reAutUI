@@ -8,11 +8,18 @@ import AppSidebarHeader from "./AppSidebarHeader";
 import AppSidebarContent from "./AppSidebarContent";
 
 function AppSidebar({ className, handleScenarioChange }) {
-  const { scenarios, setScenarios, setCurrentScenarioId, isLoading } =
-    useScenario();
+  const {
+    scenarios,
+    setScenarios,
+    setCurrentScenarioId,
+    isLoading,
+    setIsLoading,
+  } = useScenario();
   const { open } = useSidebar();
 
   const handleAddScenario = useCallback(async () => {
+    setIsLoading(true);
+
     const defaultNewScenario = {
       name: "Untitled Scenario",
     };
@@ -22,7 +29,9 @@ function AppSidebar({ className, handleScenarioChange }) {
     );
     setScenarios([...scenarios, newlyCreatedScenario]);
     setCurrentScenarioId(newlyCreatedScenario.id);
-  }, [scenarios, setScenarios, setCurrentScenarioId]);
+
+    setIsLoading(false);
+  }, [scenarios, setScenarios, setCurrentScenarioId, setIsLoading]);
 
   useEffect(() => {
     if (!isLoading && scenarios.length === 0) {

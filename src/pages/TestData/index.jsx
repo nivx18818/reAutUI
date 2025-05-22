@@ -10,7 +10,8 @@ function TestData() {
   const [testData, setTestData] = useState([]);
 
   useEffect(() => {
-    setTestData(currentScenario?.dataSetList ?? []);
+    const dataSetList = currentScenario?.dataSetList;
+    setTestData(Array.isArray(dataSetList) ? dataSetList : []);
   }, [currentScenario]);
 
   const handleChangeTestData = useCallback(

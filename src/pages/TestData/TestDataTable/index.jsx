@@ -13,10 +13,10 @@ import { Input } from "@/components/ui/input";
 import FunctionButtons from "./FunctionButtons";
 
 function TestDataTable({ testData, handleEditTestData, handleDeleteTestData }) {
-  const parsedActionList = useCurrentScenario()?.parsedActionList;
-  const fillActions = parsedActionList?.filter(
-    (action) => action.type === "FILL"
-  );
+  const currentScenario = useCurrentScenario();
+  const parsedActionList = currentScenario?.parsedActionList;
+  const parsedActions = Array.isArray(parsedActionList) ? parsedActionList : [];
+  const fillActions = parsedActions.filter((action) => action.type === "FILL");
 
   const [editingRowIndex, setEditingRowIndex] = useState(null);
 
@@ -47,7 +47,7 @@ function TestDataTable({ testData, handleEditTestData, handleDeleteTestData }) {
           </TableHeader>
 
           <TableBody>
-            {testData.map((data, rowIndex) => (
+            {testData?.map((data, rowIndex) => (
               <TableRow key={rowIndex}>
                 <TableCell>{rowIndex + 1}</TableCell>
                 {data.map((value, cellIndex) => (

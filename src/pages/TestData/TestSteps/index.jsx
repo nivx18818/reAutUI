@@ -15,7 +15,9 @@ const actionStyles = {
 };
 
 function TestSteps({ handleAddTestData }) {
-  const testSteps = useCurrentScenario()?.parsedActionList ?? [];
+  const currentScenario = useCurrentScenario();
+  const parsedActionList = currentScenario?.parsedActionList;
+  const testSteps = Array.isArray(parsedActionList) ? parsedActionList : [];
 
   const handleSubmit = (e) => {
     e.preventDefault();

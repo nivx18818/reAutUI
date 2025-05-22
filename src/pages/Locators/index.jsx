@@ -11,7 +11,9 @@ import { useCurrentScenario } from "@/hooks/useScenario";
 import { cn } from "@/lib/utils";
 
 function Locators() {
-  const locators = useCurrentScenario()?.locatorList ?? [];
+  const currentScenario = useCurrentScenario();
+  const locatorList = currentScenario?.locatorList;
+  const locators = Array.isArray(locatorList) ? locatorList : [];
 
   return (
     <Section heading="Locator Results">
