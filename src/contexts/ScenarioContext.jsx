@@ -42,6 +42,8 @@ function ScenarioProvider({ children }) {
     setIsLoading,
   };
 
+  if (window.location.pathname === "/" && isLoading) return <LoadingScreen />;
+
   return (
     <ScenarioContext.Provider value={contextValue}>
       {children}
