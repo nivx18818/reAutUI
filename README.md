@@ -25,7 +25,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 1. Clone the repository:
 
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/nivx18818/reAutUI.git
     cd reAutUI
     ```
 
