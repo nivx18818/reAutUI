@@ -38,7 +38,7 @@ function TestDataTable({ testData, handleEditTestData, handleDeleteTestData }) {
         <Table className="table-fixed">
           <TableHeader>
             <TableRow>
-              {fillActions && <TableHead className="w-16">No</TableHead>}
+              {fillActions.length > 0 && <TableHead className="w-16">No</TableHead>}
               {fillActions?.map(({ description }, index) => (
                 <TableHead key={index}>{description}</TableHead>
               ))}

@@ -27,6 +27,8 @@ function TestSteps({ handleAddTestData }) {
     e.target.reset();
   };
 
+  if (testSteps.length === 0) return <Section className="h-24" />;
+
   return (
     <Section>
       <form className="p-2.5" onSubmit={handleSubmit}>
