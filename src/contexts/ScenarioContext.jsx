@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import httpRequest from "@/utils/httpRequest";
 import LoadingScreen from "@/components/LoadingScreen";
 
@@ -8,6 +8,22 @@ function ScenarioProvider({ children }) {
   const [scenarios, setScenarios] = useState([]);
   const [currentScenarioId, setCurrentScenarioId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleAddScenario = useCallback(async () => {
+      setIsLoading(true);
+
+      const defaultNewScenario = {
+        name: "Untitled Scenario",
+      };
+      const newlyCreatedScenario = await httpRequest.post(
+        "/scenarios",
+        defaultNewScenario
+      );
+      setScenarios([...scenarios, newlyCreatedScenario]);
+      setCurrentScenarioId(newlyCreatedScenario.id);
+
+      setIsLoading(false);
+    }, [scenarios, setScenarios, setCurrentScenarioId, setIsLoading]);
 
   useEffect(() => {
     const fetchScenarios = async () => {
@@ -23,6 +39,12 @@ function ScenarioProvider({ children }) {
     };
     fetchScenarios();
   }, []);
+
+  useEffect(() => {
+    if (!isLoading && scenarios.length === 0) {
+      handleAddScenario();
+    }
+  }, [scenarios, handleAddScenario, isLoading]);
 
   const updateScenarioInContext = (updatedScenario) => {
     setScenarios(
@@ -40,6 +62,7 @@ function ScenarioProvider({ children }) {
     updateScenarioInContext,
     isLoading,
     setIsLoading,
+    handleAddScenario,
   };
 
   if (window.location.pathname === "/" && isLoading) return <LoadingScreen />;

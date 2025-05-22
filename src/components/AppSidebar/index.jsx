@@ -13,25 +13,9 @@ function AppSidebar({ className, handleScenarioChange }) {
     setScenarios,
     setCurrentScenarioId,
     isLoading,
-    setIsLoading,
+    handleAddScenario,
   } = useScenario();
   const { open } = useSidebar();
-
-  const handleAddScenario = useCallback(async () => {
-    setIsLoading(true);
-
-    const defaultNewScenario = {
-      name: "Untitled Scenario",
-    };
-    const newlyCreatedScenario = await httpRequest.post(
-      "/scenarios",
-      defaultNewScenario
-    );
-    setScenarios([...scenarios, newlyCreatedScenario]);
-    setCurrentScenarioId(newlyCreatedScenario.id);
-
-    setIsLoading(false);
-  }, [scenarios, setScenarios, setCurrentScenarioId, setIsLoading]);
 
   useEffect(() => {
     if (!isLoading && scenarios.length === 0) {
