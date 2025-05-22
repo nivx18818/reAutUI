@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect } from "react";
+import { memo, useEffect } from "react";
 import useSidebar from "@/hooks/use-sidebar";
 import useScenario from "@/hooks/useScenario";
 import httpRequest from "@/utils/httpRequest";

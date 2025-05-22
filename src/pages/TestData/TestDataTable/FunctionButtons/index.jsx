@@ -20,7 +20,12 @@ function FunctionButtons({
 
   const currentScenario = useCurrentScenario();
   const { updateScenarioInContext, setIsLoading } = useScenario();
-  const { id, url, parsedActionList, dataSetList } = currentScenario;
+  const {
+    id = null,
+    url = null,
+    parsedActionList = null,
+    dataSetList = null,
+  } = currentScenario ?? {};
 
   const handleGenerateScript = async (currentRowIndex) => {
     setIsLoading(true);
