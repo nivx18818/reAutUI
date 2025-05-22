@@ -67,8 +67,6 @@ function TestData() {
       return action;
     });
 
-    console.log("reached here");
-
     const res = await httpRequest.post("/script/generate", {
       url: currentScenario?.url,
       parsedActions: actionsWithData,
