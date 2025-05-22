@@ -15,12 +15,14 @@ function ScenarioProvider({ children }) {
     const defaultNewScenario = {
       name: "Untitled Scenario",
     };
-    const newlyCreatedScenario = await httpRequest.post(
+
+    const newScenario = await httpRequest.post(
       "/scenarios",
       defaultNewScenario
     );
-    setScenarios((prevScenarios) => [...prevScenarios, newlyCreatedScenario]);
-    setCurrentScenarioId(newlyCreatedScenario?.id);
+
+    setScenarios((prevScenarios) => [...prevScenarios, newScenario]);
+    setCurrentScenarioId(newScenario?.id);
 
     setIsLoading(false);
   }, []);

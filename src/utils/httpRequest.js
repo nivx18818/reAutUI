@@ -10,10 +10,10 @@ const httpRequest = axios.create({
 const request = async (method, url, data, config) => {
   try {
     const res = await httpRequest({ method, url, data, ...config });
-    return res.data;
+    return res?.data;
   } catch (error) {
     console.error(error);
-    return null;
+    return error?.response?.data;
   }
 };
 
