@@ -10,6 +10,8 @@ import TestData from "@/pages/TestData";
 function AppRouter() {
   const { currentScenarioId } = useScenario();
 
+  if (!currentScenarioId) return null;
+
   return (
     <Routes>
       <Route

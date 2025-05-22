@@ -29,22 +29,26 @@ function Script() {
 
   return (
     <Section heading="Executable Python Script" className="p-5 pt-1">
-      <div className="rounded-md bg-secondary">
-        <ScrollArea className="h-[50vh] p-4">
-          <pre className="font-mono">{script}</pre>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
-      </div>
-      <div className="flex mt-4 space-x-2">
-        <Button variant="outline" size="sm" onClick={handleDownloadScript}>
-          <Download />
-          <span>DOWNLOAD SCRIPT</span>
-        </Button>
-        <Button variant="outline" size="sm" onClick={handleCopyScript}>
-          <Copy />
-          <span>COPY SCRIPT</span>
-        </Button>
-      </div>
+      {script && (
+        <>
+          <div className="rounded-md bg-secondary">
+            <ScrollArea className="h-[50vh] p-4">
+              <pre className="font-mono">{script}</pre>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
+          </div>
+          <div className="flex mt-4 space-x-2">
+            <Button variant="outline" size="sm" onClick={handleDownloadScript}>
+              <Download />
+              <span>DOWNLOAD SCRIPT</span>
+            </Button>
+            <Button variant="outline" size="sm" onClick={handleCopyScript}>
+              <Copy />
+              <span>COPY SCRIPT</span>
+            </Button>
+          </div>
+        </>
+      )}
     </Section>
   );
 }

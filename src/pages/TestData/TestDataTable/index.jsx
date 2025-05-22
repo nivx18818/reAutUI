@@ -32,15 +32,13 @@ function TestDataTable({ testData, handleEditTestData, handleDeleteTestData }) {
     setEditingRowIndex(null);
   };
 
-  if (fillActions?.length === 0) return null;
-
   return (
     <Section heading="Test Data">
       <form className="max-w-2xl" onSubmit={handleSubmit}>
         <Table className="table-fixed">
           <TableHeader>
             <TableRow>
-              <TableHead className="w-16">No</TableHead>
+              {fillActions && <TableHead className="w-16">No</TableHead>}
               {fillActions?.map(({ description }, index) => (
                 <TableHead key={index}>{description}</TableHead>
               ))}

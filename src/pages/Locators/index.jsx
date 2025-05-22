@@ -11,7 +11,7 @@ import { useCurrentScenario } from "@/hooks/useScenario";
 import { cn } from "@/lib/utils";
 
 function Locators() {
-  const locators = useCurrentScenario()?.locatorList;
+  const locators = useCurrentScenario()?.locatorList ?? [];
 
   return (
     <Section heading="Locator Results">
@@ -23,7 +23,7 @@ function Locators() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {locators.map(({ description, xpath }) => (
+          {locators?.map(({ description, xpath }) => (
             <TableRow key={description}>
               <TableCell>{description}</TableCell>
               <TableCell

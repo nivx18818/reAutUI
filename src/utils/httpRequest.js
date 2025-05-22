@@ -17,14 +17,11 @@ const request = async (method, url, data, config) => {
   }
 };
 
-export const get = async (url, config) => request("GET", url, null, config);
-export const post = async (url, data, config) =>
-  request("POST", url, data, config);
-export const put = async (url, data, config) =>
-  request("PUT", url, data, config);
-export const patch = async (url, data, config) =>
-  request("PATCH", url, data, config);
-export const del = async (url, config) => request("DELETE", url, null, config);
+const get = async (url, config) => request("GET", url, null, config);
+const post = async (url, data, config) => request("POST", url, data, config);
+const put = async (url, data, config) => request("PUT", url, data, config);
+const patch = async (url, data, config) => request("PATCH", url, data, config);
+const del = async (url, config) => request("DELETE", url, null, config);
 
 export default {
   get,
