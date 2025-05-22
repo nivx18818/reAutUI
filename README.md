@@ -60,6 +60,20 @@ In the project directory, you can run:
 - `npm run lint`: Lints the project files using ESLint.
 - `npm run preview`: Serves the production build locally for preview.
 
+## Testing
+
+After installation, install Playwright browsers:
+
+```cmd
+npx playwright install
+```
+
+You can run the following scripts:
+
+- `npm run test` - runs all unit tests with Vitest.
+- `npm run test:unit` - runs Vitest unit tests.
+- `npm run test:e2e` - runs Playwright end-to-end tests.
+
 ## Learn More
 
 - [Vite Documentation](https://vitejs.dev/)
