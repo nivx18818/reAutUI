@@ -31,17 +31,16 @@ function Scenario() {
     }
 
     const updatedScenarioData = {
-      ...currentScenario,
       ...data,
       parsedActionList,
     };
 
-    await httpRequest.put(
-      `/scenarios/${currentScenario.id}`,
+    const updatedScenario = await httpRequest.put(
+      `/scenarios/${currentScenario?.id}`,
       updatedScenarioData
     );
 
-    updateScenarioInContext(updatedScenarioData);
+    updateScenarioInContext(updatedScenario);
     navigate("../test-data");
   };
 
@@ -71,7 +70,9 @@ function Scenario() {
           required
         />
         {parsingError && (
-          <Badge variant="destructive" className="text-sm text-white">{parsingError}</Badge>
+          <Badge variant="destructive" className="text-sm text-white">
+            {parsingError}
+          </Badge>
         )}
       </label>
 
