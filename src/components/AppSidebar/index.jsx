@@ -24,6 +24,14 @@ function AppSidebar({ className, handleScenarioChange }) {
   }, [scenarios, handleAddScenario, isLoading]);
 
   const handleDeleteScenario = async (id) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this scenario?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
     await httpRequest.del(`/scenarios/${id}`);
     setScenarios(scenarios.filter((scenario) => scenario.id !== id));
     setCurrentScenarioId(scenarios[0]);
