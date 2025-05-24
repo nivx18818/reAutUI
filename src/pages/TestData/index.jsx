@@ -105,6 +105,14 @@ function TestData() {
   };
 
   const handleDeleteTestData = async (index) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this test data?"
+    );
+
+    if (!isConfirmed) {
+      return;
+    }
+
     const updatedTestData = [
       ...testData.slice(0, index),
       ...testData.slice(index + 1),

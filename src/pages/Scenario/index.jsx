@@ -31,6 +31,7 @@ function Scenario() {
     }
 
     const updatedScenarioData = {
+      name: currentScenario.name,
       ...data,
       parsedActionList,
     };
